@@ -27,7 +27,7 @@ open class ContainerCollectionViewCell<CustomView: UIView>: UICollectionViewCell
   /// Initializes and returns a newly allocated view object with the specified frame rectangle.
   /// - Parameter frame: The frame rectangle for the view, measured in points. The origin of the frame is relative
   ///   to the superview in which you plan to add it.
-  override init(frame: CGRect) {
+  open override init(frame: CGRect) {
     super.init(frame: frame)
     setupSubviews()
   }
