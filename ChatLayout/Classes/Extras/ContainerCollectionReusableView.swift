@@ -24,8 +24,8 @@ public final class ContainerCollectionReusableView<CustomView: UIView>: UICollec
   /// An instance of `ContainerCollectionViewCellDelegate`
   public weak var delegate: ContainerCollectionViewCellDelegate?
   
-  /// An instance of `ContainerCollectionViewCellReuseDelegate`
-  public weak var reuseDelegate: ContainerCollectionViewCellReuseDelegate?
+  /// An instances of `ContainerCollectionViewCellReuseDelegate`
+  public let reuseDelegates = MulticastDelegate<ContainerCollectionViewCellReuseDelegate>()
   
   /// Initializes and returns a newly allocated view object with the specified frame rectangle.
   /// - Parameter frame: The frame rectangle for the view, measured in points. The origin of the frame is relative
@@ -44,7 +44,7 @@ public final class ContainerCollectionReusableView<CustomView: UIView>: UICollec
   /// Performs any clean up necessary to prepare the view for use again.
   public override func prepareForReuse() {
     super.prepareForReuse()
-    reuseDelegate?.prepareForReuse()
+    reuseDelegates.invoke { $0.prepareForReuse() }
   }
   
   /// Gives the cell a chance to modify the attributes provided by the layout object.
