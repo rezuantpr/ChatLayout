@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 /// A container `UICollectionViewCell` that constraints its contained view to its margins.
-open class ContainerCollectionViewCell<CustomView: UIView>: UICollectionViewCell {
+public class ContainerCollectionViewCell<CustomView: UIView>: UICollectionViewCell {
   
   /// Default reuse identifier is set with the class name.
   public static var reuseIdentifier: String {
@@ -24,10 +24,13 @@ open class ContainerCollectionViewCell<CustomView: UIView>: UICollectionViewCell
   /// An instance of `ContainerCollectionViewCellDelegate`
   public weak var delegate: ContainerCollectionViewCellDelegate?
   
+  /// An instance of `ContainerCollectionViewCellReuseDelegate`
+  public weak var reuseDelegate: ContainerCollectionViewCellReuseDelegate?
+  
   /// Initializes and returns a newly allocated view object with the specified frame rectangle.
   /// - Parameter frame: The frame rectangle for the view, measured in points. The origin of the frame is relative
   ///   to the superview in which you plan to add it.
-  public override init(frame: CGRect) {
+  override init(frame: CGRect) {
     super.init(frame: frame)
     setupSubviews()
   }
@@ -39,9 +42,9 @@ open class ContainerCollectionViewCell<CustomView: UIView>: UICollectionViewCell
   }
   
   /// Performs any clean up necessary to prepare the view for use again.
-  open override func prepareForReuse() {
+  public override func prepareForReuse() {
     super.prepareForReuse()
-    delegate?.prepareForReuse()
+    reuseDelegate?.prepareForReuse()
   }
   
   /// Gives the cell a chance to modify the attributes provided by the layout object.

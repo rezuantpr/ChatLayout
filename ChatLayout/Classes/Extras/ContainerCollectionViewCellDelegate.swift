@@ -14,9 +14,6 @@ import UIKit
 /// it is required to participate in containers lifecycle.
 public protocol ContainerCollectionViewCellDelegate: AnyObject {
 
-    /// Perform any clean up necessary to prepare the view for use again.
-    func prepareForReuse()
-
     /// Allows to override the call of `ContainerCollectionViewCell`/`ContainerCollectionReusableView`
     /// `UICollectionReusableView.preferredLayoutAttributesFitting(...)` and make the layout calculations.
     ///
@@ -42,9 +39,6 @@ public protocol ContainerCollectionViewCellDelegate: AnyObject {
 
 /// Default extension to make the methods optional for implementation in the successor
 public extension ContainerCollectionViewCellDelegate {
-
-    /// Default implementation does nothing.
-    func prepareForReuse() {}
 
     /// Default implementation returns: `nil`.
     func preferredLayoutAttributesFitting(_ layoutAttributes: ChatLayoutAttributes) -> ChatLayoutAttributes? {
